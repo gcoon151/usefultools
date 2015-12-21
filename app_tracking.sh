@@ -22,4 +22,6 @@ echo org: $org_name
 
 cf target -o $org_name -s $space_name
 
-cf logs --recent $app |more
+# I had this grabbing the logs after targeting the app 
+# but didn't like it not showing me where I was longer.
+#cf logs --recent $app |more
