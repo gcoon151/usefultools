@@ -3,10 +3,21 @@
 input=$1
 echo input: $input
 
-# Ok with the app name you have to figure out space and org. 
-# This output only gives you the space UID and the space name
+#Ok input was just a hostname so we have to start there.
 space_url=`cf curl /v2/routes?q=host:$input| grep space_url| sed 's/            "space_url": "\(.*\)",/\1/'`
 echo space_url: $space_url
+
+# Let's get the real app name now. 
+
+app_url=`cf curl /v2/routes?q=host:$input| grep apps_url | sed 's/            "apps_url": "\(.*\)"/\1/'`
+echo app_url: $app_url
+
+
+app_name=`cf curl $app_url|grep name| sed 's/      "name": "\(.*\)",/\1/'`
+echo app_name: $app_name
+
+# Ok with the space url you can figure out space and org. 
+# This output only gives you the space UID and the space name
 space_name=`cf curl $space_url|grep name| sed 's/      "name": "\(.*\)",/\1/'`
 echo space_name: $space_name
 
@@ -20,3 +31,4 @@ echo org: $org_name
 cf target -o $org_name -s $space_name
 
 #cf logs --recent $app |more
+
