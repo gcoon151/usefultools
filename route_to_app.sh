@@ -30,5 +30,9 @@ echo org: $org_name
 
 cf target -o $org_name -s $space_name
 
-#cf logs --recent $app |more
+echo "For your convenience"
+echo Get app logs with: cf logs --recent $app_name |more
+echo Find which DEA it is on: cf curl $app_url/stats
+
+
 
