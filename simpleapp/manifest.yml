@@ -1,0 +1,9 @@
+applications:
+- path: .
+  memory: 128M
+  instances: 1
+  domain: validdomain.net
+  name: app1
+  host: app1
+  disk_quota: 1024M
+  buildpack: php_buildpack
