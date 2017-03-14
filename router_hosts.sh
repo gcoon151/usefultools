@@ -1,4 +1,6 @@
 #!/bin/bash
+# Script I wrote to run on a go router in cloud foundry and create a hosts file for people who don't have DNS
+# or don't have access to the nameserver and wildcard DNS capabilities. It was a hack for a specific situation.
 USER=`head /var/vcap/jobs/gorouter/config/gorouter.yml| awk '/user: /{print $2}'`
 PASS=`head /var/vcap/jobs/gorouter/config/gorouter.yml| awk '/pass: /{print $2}' | sed -e 's/\"//g'`
 ENDPOINT=`netstat -an|grep LISTEN |awk '/8080/ {print $4}'`
