@@ -1,0 +1,6 @@
+op ... item
+cat output.txt |jq '.details.fields' | jq -c 'map(select(.name | contains("password") ).value )'
+
+so opkey=`op login`;
+opvalue=`op get item blah| ^^ jq`;
+and go. 
